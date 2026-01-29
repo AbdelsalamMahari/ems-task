@@ -1,6 +1,6 @@
 interface OptionItem {
-  label: string;
-  value: string;
+  full_name: string;
+  id: string;
 }
 
 export interface StyledDropDownProps {
@@ -9,4 +9,5 @@ export interface StyledDropDownProps {
   options: OptionItem[];
   value: string;
   onChange: (e:any) => void;
+  name: string
 }
