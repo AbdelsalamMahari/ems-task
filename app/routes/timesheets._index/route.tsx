@@ -1,6 +1,10 @@
 import { Link, useLoaderData } from "react-router";
-import { useState } from "react";
 import { getDB } from "~/db/getDB";
+import Calendar from "components/calendar/Calendar";
+import { useState } from "react";
+import './TimesheetPage.css'
+import SearchBar from "elements/searchBar/SearchBar";
+import { formatDateTime } from "utils/FormatDateTime";
 
 export async function loader() {
   const db = await getDB();
@@ -13,38 +17,64 @@ export async function loader() {
 
 export default function TimesheetsPage() {
   const { timesheetsAndEmployees } = useLoaderData();
+  const [isCalendarView, setIsCalendarView] = useState<boolean>(false)
+      const [searchQuery, setSearchQuery] = useState("");
+    const [filteredItems, setFilteredItems] = useState(timesheetsAndEmployees);
+
+  const handleChangeView = () => {
+    setIsCalendarView(!isCalendarView)
+  }
+
+      const handleSearch = (e:any) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const filtered = timesheetsAndEmployees.filter(
+      (timesheet:any) =>
+        timesheet.full_name.toLowerCase().includes(query)
+    );
+    setFilteredItems(filtered);
+  };
 
   return (
     <div>
       <div>
-        <button>Table View</button>
-        <button>Calendar View</button>
+        <button onClick={handleChangeView}>{isCalendarView ? 'Table View' : 'Calendar View'}</button>
       </div>
       {/* Replace `true` by a variable that is changed when the view buttons are clicked */}
-      {true ? (
-        <div>
-          {timesheetsAndEmployees.map((timesheet: any) => (
-           <Link to={`${timesheet.id}`}>
-            <div key={timesheet.id}>
-              <ul>
-                <li>Timesheet #{timesheet.id}</li>
-                <ul>
-                  <li>Employee: {timesheet.full_name} (ID: {timesheet.employee_id})</li>
-                  <li>Start Time: {timesheet.start_time}</li>
-                  <li>End Time: {timesheet.end_time}</li>
-                  <li>Summary: {timesheet.summary}</li>
-                </ul>
-              </ul>
-            </div>
-            </Link>
+      {!isCalendarView ? (
+        
+    <div className="timesheets-table-container">
+      <SearchBar value={searchQuery} onChange={handleSearch}/>
+      <table className="timesheets-table">
+        <thead>
+          <tr>
+            <th>Timesheet ID</th>
+            <th>Employee</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredItems.map((timesheet:any) => (
+            <tr key={timesheet.id}>
+              <td>
+                <Link to={`${timesheet.id}`}>#{timesheet.id}</Link>
+              </td>
+              <td>{timesheet.full_name} (ID: {timesheet.employee_id})</td>
+              <td>{formatDateTime(timesheet.start_time)}</td>
+              <td>{formatDateTime(timesheet.end_time)}</td>
+              <td>{timesheet.summary || '—'}</td>
+            </tr>
           ))}
-        </div>
+        </tbody>
+      </table>
+    </div>
 
       ) : (
         <div>
-          <p>
-            To implement, see <a href="https://schedule-x.dev/docs/frameworks/react">Schedule X React documentation</a>.
-          </p>
+          <Calendar allEvents={timesheetsAndEmployees}/>
         </div>
       )}
       <hr />

@@ -1,0 +1,35 @@
+.timesheets-table-container {
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.timesheets-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.timesheets-table th,
+.timesheets-table td {
+  border: 1px solid #ccc;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.timesheets-table th {
+  background-color: #f5f5f5;
+  font-weight: 700;
+}
+
+.timesheets-table tr:hover {
+  background-color: #f0f8ff;
+}
+
+.timesheets-table td a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.timesheets-table td a:hover {
+  text-decoration: underline;
+}
