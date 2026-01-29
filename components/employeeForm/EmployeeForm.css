@@ -1,0 +1,10 @@
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.action-btn{
+    display: flex;
+    margin-top: 1.5rem;
+}

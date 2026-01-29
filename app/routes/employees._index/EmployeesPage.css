@@ -1,5 +1,11 @@
+.emp-cont{
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
 .employee-card-cont{
-    padding: 1.5rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;

@@ -1,5 +1,8 @@
 import EmployeeForm from "components/employeeForm/EmployeeForm";
 import NewEmployee from "components/employeeForm/EmployeeForm";
+import HeaderNavigator from "elements/headerNavigator/HeaderNavigator";
+import LinkNavigator from "elements/linkNavigator/LinkNavigator";
+import { FiClock } from "react-icons/fi";
 import { Form, redirect, type ActionFunction } from "react-router";
 import { getDB } from "~/db/getDB";
 
@@ -26,16 +29,15 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function NewEmployeePage() {
   return (
-    <div>
-      <h1>Create New Employee</h1>
+    <div style={{padding: '3rem'}}>
+      <div style={{display:'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <HeaderNavigator title={'Create New Employee'} />
+      <LinkNavigator icon={<FiClock fontSize={'1.25rem'}/>} title={'Timesheets'} link={'/timesheets'}/>
+      </div>
+
       <Form method="post">
         <EmployeeForm/>
       </Form>
-      <hr />
-      <ul>
-        <li><a href="/employees">Employees</a></li>
-        <li><a href="/timesheets">Timesheets</a></li>
-      </ul>
     </div>
   );
 }

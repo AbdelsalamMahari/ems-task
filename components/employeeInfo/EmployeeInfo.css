@@ -1,0 +1,30 @@
+.employee-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+.info-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -12,5 +12,4 @@ interface EmployeeInfoData {
 
 export interface EmployeeInfoProps {
 data: EmployeeInfoData
-onUpdate: () => void
 }

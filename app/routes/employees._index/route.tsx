@@ -4,6 +4,10 @@ import { getDB } from "~/db/getDB"
 import './EmployeesPage.css'
 import SearchBar from "elements/searchBar/SearchBar"
 import { useState } from "react"
+import HeaderNavigator from "elements/headerNavigator/HeaderNavigator"
+import LinkNavigator from "elements/linkNavigator/LinkNavigator"
+import { RiUserAddLine } from "react-icons/ri"
+import { FiClock } from "react-icons/fi"
 
 export async function loader() {
   const db = await getDB()
@@ -30,18 +34,25 @@ export default function EmployeesPage() {
     setFilteredItems(filtered);
   };
   return (
-    <div>
-      <SearchBar value={searchQuery} onChange={handleSearch}/>
-      <div className="employee-card-cont">
-        {filteredItems.map((employee: any) => (
-          <EmployeeCard data={employee}/>
-        ))}
+    <div className="emp-cont">
+      <HeaderNavigator title={'Employees'} description={'Manage employee, view details, and update employee information'} />
+
+      <div>
+        <div className="nav-head">
+        <SearchBar value={searchQuery} onChange={handleSearch}/>
+        <div className="nav-head-icons">
+          <LinkNavigator icon={<RiUserAddLine fontSize={'1.25rem'}/>} title={'Add New Employee'} link={'/employees/new'}/>
+          <LinkNavigator icon={<FiClock fontSize={'1.25rem'}/>} title={'Timesheets'} link={'/timesheets'}/>
+          </div>
+        </div>
+
+        <div className="employee-card-cont">
+          {filteredItems.length === 0 ? (<h1>No results found</h1>) : 
+          filteredItems.map((employee: any) => (
+            <EmployeeCard data={employee}/>
+          ))}
+        </div>
       </div>
-      <hr />
-      <ul>
-        <li><a href="/employees/new">New Employee</a></li>
-        <li><a href="/timesheets/">Timesheets</a></li>
-      </ul>
     </div>
   )
 }

@@ -1,0 +1,28 @@
+.home-cont {
+  padding: 3rem;
+}
+
+.home-card-cont {
+  padding: 1.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.home-card {
+  width: 100%;
+  min-width: 0;
+  resize: none;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  background-color: transparent;
+  border-radius: 12px;
+  gap: 20px;
+  border: 1px solid #111;
+  cursor: pointer;
+}

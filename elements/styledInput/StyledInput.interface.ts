@@ -5,5 +5,7 @@ export interface StyledInputProps {
   onChange?: (e: any) => void;
   isTextArea?: boolean;
   type?: React.HTMLInputTypeAttribute;
-  name: string
+  name: string;
+  id: string;
+  required?: boolean
 }

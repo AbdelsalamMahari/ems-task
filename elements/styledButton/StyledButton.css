@@ -1,0 +1,37 @@
+.styled-button {
+  display: flex;
+  min-width: 5.25rem;      
+  max-width: 30rem;      
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0.75rem;   
+  height: 2.5rem;          
+  padding: 0.625rem 1rem;   
+  flex: 1;
+  background-color: #1E3A8A;
+  color: white;
+  font-size: 0.875rem;    
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: 0.015em;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+  border: none;
+}
+
+.styled-button:hover {
+  background-color: #106bb5;
+}
+
+.styled-button:active {
+  transform: scale(0.98);
+}
+
+/* Button text */
+.styled-button-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

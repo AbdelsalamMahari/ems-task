@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import type { EmployeeFormProps } from './EmployeeForm.interface'
+import StyledInput from 'elements/styledInput/StyledInput';
+import StyledButton from 'elements/styledButton/StyledButton';
+import './EmployeeForm.css'
 
 const EmployeeForm = ({data}:EmployeeFormProps) => {
   const [employee, setEmployee] = useState({
@@ -15,36 +18,29 @@ const EmployeeForm = ({data}:EmployeeFormProps) => {
 });
   return (
     <div>
-        <div>
-          <label htmlFor="full_name">Full Name</label>
-          <input type="text" name="full_name" id="full_name" required value={employee.full_name} onChange={(e) => setEmployee({...employee, full_name: e.target.value})}/>
+        <div className="form-grid">
+          <StyledInput label='Full Name' type="text" name="full_name" id="full_name" required value={employee.full_name} onChange={(e) => setEmployee({...employee, full_name: e.target.value})}/>
 
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" required value={employee.email} onChange={(e) => setEmployee({...employee, email: e.target.value})}/>
+          <StyledInput label='Email' type="email" name="email" id="email" required value={employee.email} onChange={(e) => setEmployee({...employee, email: e.target.value})}/>
 
-          <label htmlFor="phone_number">Phone Number</label>
-          <input type="number" name="phone_number" id="phone_number" value={employee.phone_number} onChange={(e) => setEmployee({...employee, phone_number: e.target.value})}/>
+          <StyledInput label='Phone Number' type="number" name="phone_number" id="phone_number" value={employee.phone_number} onChange={(e) => setEmployee({...employee, phone_number: e.target.value})}/>
 
-          <label htmlFor="dob">Date of Birth</label>
-          <input type="date" name="dob" id="dob" value={employee.dob} onChange={(e) => setEmployee({...employee, dob: e.target.value})}/>
+          <StyledInput label='Date of Birth' type="date" name="dob" id="dob" value={employee.dob} onChange={(e) => setEmployee({...employee, dob: e.target.value})}/>
+
+          <StyledInput label='Job Title' type="text" name="job_title" id="job_title" value={employee.job_title} onChange={(e) => setEmployee({...employee, job_title: e.target.value})}/>
+
+          <StyledInput label='Department' type="text" name="department" id="department" value={employee.department} onChange={(e) => setEmployee({...employee, department: e.target.value})}/>
+
+          <StyledInput label='Salary' type="number" name="salary" id="salary" value={employee.salary} onChange={(e) => setEmployee({...employee, salary: e.target.value})}/>
+
+          <StyledInput label='Start date' type="date" name="start_date" id="start_date" value={employee.start_date} onChange={(e) => setEmployee({...employee, start_date: e.target.value})}/>
+
+          <StyledInput label='End date' type="date" name="end_date" id="end_date" value={employee.end_date} onChange={(e) => setEmployee({...employee, end_date: e.target.value})}/>
         </div>
-        <div>
-          <label htmlFor="job_title">Job Title</label>
-          <input type="text" name="job_title" id="job_title" value={employee.job_title} onChange={(e) => setEmployee({...employee, job_title: e.target.value})}/>
 
-          <label htmlFor="department">Department</label>
-          <input type="text" name="department" id="department" value={employee.department} onChange={(e) => setEmployee({...employee, department: e.target.value})}/>
-
-          <label htmlFor="salary">Salary</label>
-          <input type="number" name="salary" id="salary" value={employee.salary} onChange={(e) => setEmployee({...employee, salary: e.target.value})}/>
-
-          <label htmlFor="start_date">Start date</label>
-          <input type="date" name="start_date" id="start_date" value={employee.start_date} onChange={(e) => setEmployee({...employee, start_date: e.target.value})}/>
-
-          <label htmlFor="end_date">End date</label>
-          <input type="date" name="end_date" id="end_date" value={employee.end_date} onChange={(e) => setEmployee({...employee, end_date: e.target.value})}/>
+        <div className='action-btn'>
+          <StyledButton type="submit" title={data ? "Update Employee" : "Create Employee"}/>
         </div>
-        <button type="submit">{data ? "Update Employee" : "Create Employee"}</button>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import type { StyledInputProps } from './StyledInput.interface'
 import './StyledInput.css'
 
-const StyledInput = ({label, placeholder, value, onChange, isTextArea = false, type = "text", name}:StyledInputProps) => {
+const StyledInput = ({label, placeholder, value, onChange, isTextArea = false, type = "text", name, id, required}:StyledInputProps) => {
   return (
     <div className="input-container">
       <label className="input-label-container">
@@ -23,6 +23,9 @@ const StyledInput = ({label, placeholder, value, onChange, isTextArea = false, t
             placeholder={placeholder}
             value={value}
             onChange={onChange}
+            name={name}
+            id={id}
+            required={required}
           />
         )}
       </label>

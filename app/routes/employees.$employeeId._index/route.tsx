@@ -4,6 +4,11 @@ import { useState } from "react"
 import { Form, useLoaderData, useParams, type ActionFunction } from "react-router"
 import { getDB } from "~/db/getDB"
 import EmployeeInfo from "components/employeeInfo/EmployeeInfo"
+import HeaderNavigator from "elements/headerNavigator/HeaderNavigator"
+import LinkNavigator from "elements/linkNavigator/LinkNavigator"
+import { RiUserAddLine } from "react-icons/ri"
+import { FiClock } from "react-icons/fi"
+import { FaRegEdit } from "react-icons/fa"
 
 export async function loader({params}:any) {
   const { employeeId } = params
@@ -48,14 +53,19 @@ export default function EmployeePage() {
 
   return (
     <>
-    <div>
-      <EmployeeInfo data={employee} onUpdate={onUpdateClick}/>
-      <ul>
-        <li><a href="/employees">Employees</a></li>
-        <li><a href="/employees/new">New Employee</a></li>
-        <li><a href="/timesheets/">Timesheets</a></li>
-      </ul>
-
+    <div style={{padding: '3rem'}}>
+      <div className="nav-head">
+        <HeaderNavigator title={employee.full_name} />
+        <div className="nav-head-icons">
+          <div style={{display: 'flex', gap: '0.5rem', alignItems: 'center', cursor: 'pointer'}} onClick={onUpdateClick}>
+            <>{<FaRegEdit />}</>
+            <h1 style={{fontSize: '1rem'}}>{'Edit Employee'}</h1>
+            </div>
+          <LinkNavigator icon={<RiUserAddLine fontSize={'1.25rem'}/>} title={'Add New Employee'} link={'/employees/new'}/>
+          <LinkNavigator icon={<FiClock fontSize={'1.25rem'}/>} title={'Timesheets'} link={'/timesheets'}/>
+        </div>
+      </div>
+      <EmployeeInfo data={employee}/>
     </div>
     {showUpdatePopup && (
         <Popup

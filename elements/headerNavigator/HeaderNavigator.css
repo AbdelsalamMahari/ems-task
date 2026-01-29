@@ -1,0 +1,12 @@
+.header-nav-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.arrow-title {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
