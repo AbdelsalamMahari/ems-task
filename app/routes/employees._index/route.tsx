@@ -1,5 +1,9 @@
-import { useLoaderData } from "react-router"
+import EmployeeCard from "components/employeeCard/EmployeeCard"
+import { Link, useLoaderData } from "react-router"
 import { getDB } from "~/db/getDB"
+import './EmployeesPage.css'
+import SearchBar from "elements/searchBar/SearchBar"
+import { useState } from "react"
 
 export async function loader() {
   const db = await getDB()
@@ -10,18 +14,27 @@ export async function loader() {
 
 export default function EmployeesPage() {
   const { employees } = useLoaderData()
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredItems, setFilteredItems] = useState(employees);
+
+    const handleSearch = (e:any) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const filtered = employees.filter(
+      (employee:any) =>
+        employee.full_name.toLowerCase().includes(query) ||
+        employee.email.toLowerCase().includes(query) ||
+        employee.phone_number.includes(query)
+    );
+    setFilteredItems(filtered);
+  };
   return (
     <div>
-      <div>
-        {employees.map((employee: any) => (
-          <div>
-            <ul>
-              <li>Employee #{employee.id}</li>
-              <ul>
-                <li>Full Name: {employee.full_name}</li>
-              </ul>
-            </ul>
-          </div>
+      <SearchBar value={searchQuery} onChange={handleSearch}/>
+      <div className="employee-card-cont">
+        {filteredItems.map((employee: any) => (
+          <EmployeeCard data={employee}/>
         ))}
       </div>
       <hr />

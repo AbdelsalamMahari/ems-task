@@ -1,0 +1,41 @@
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 30rem;
+  flex: 1;
+}
+
+.dropdown-label {
+  color: #101828;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.dropdown-select {
+  width: 100%;
+  min-width: 0;
+  height: 3.5rem;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  border-radius: 0.75rem;
+  border: none;
+  background-color: #f2f4f7;
+  color: #637588;
+  cursor: pointer;
+}
+
+.dropdown-select.has-value {
+  color: #101828;
+}
+
+.dropdown-select:focus {
+  outline: none;
+}
+
+.dropdown-select option {
+  color: #101828;
+  background-color: #ffffff;
+}
