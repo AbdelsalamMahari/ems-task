@@ -71,7 +71,6 @@ export default function EmployeesPage() {
   const handleSortChange = (e:any) => {
     const option = e.target.value
     setSortOption(option)
-    console.log('sort by: ', sortOption)
 
     const sortedEmployee = filteredItems.sort((a:any, b:any) => {
       if (option === 'oldestStartDate') {

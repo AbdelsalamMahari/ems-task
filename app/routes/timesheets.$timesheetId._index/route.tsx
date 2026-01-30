@@ -14,7 +14,6 @@ export async function loader({params}:any) {
   const { timesheetId } = params
   const db = await getDB()
   const timesheet = await db.get("SELECT timesheets.*, employees.full_name, employees.id AS employee_id FROM timesheets JOIN employees ON timesheets.employee_id = employees.id WHERE timesheets.id = ?", [timesheetId])
-  console.log(timesheet)
   return {timesheet}
 }
 

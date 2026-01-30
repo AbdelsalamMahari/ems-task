@@ -15,7 +15,6 @@ export async function loader({params}:any) {
   const { employeeId } = params
   const db = await getDB()
   const employee = await db.get("SELECT * FROM employees WHERE id = ?", [employeeId])
-  console.log(employee)
   return {employee}
 }
 

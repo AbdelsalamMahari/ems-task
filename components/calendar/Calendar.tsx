@@ -13,8 +13,6 @@ import { useEffect, useState } from 'react'
 function Calendar({allEvents}:any) {
   const eventsService = useState(() => createEventsServicePlugin())[0]
 
-  console.log('allEvents',allEvents)
-
   const events = allEvents.map((event:any) => ({
   id: event.id,              
   title: event.full_name,

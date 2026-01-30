@@ -16,7 +16,6 @@ const TimesheetForm = ({data, setSelectedUserId}:any) => {
   const handleOptionChange = (e:any) => {
     setEmployeeId(e.target.value)
     setSelectedUserId(e.target.value)
-    console.log(e.target.value)
   }
 
     const [timesheet, setTimeSheet] = useState({
