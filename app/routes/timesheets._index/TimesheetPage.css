@@ -1,5 +1,7 @@
 .timesheets-table-container {
-  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   overflow-x: auto;
 }
 
@@ -25,11 +27,26 @@
   background-color: #f0f8ff;
 }
 
-.timesheets-table td a {
-  color: #007bff;
-  text-decoration: none;
-}
-
 .timesheets-table td a:hover {
   text-decoration: underline;
+}
+
+.styled-button-toggle {
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0.75rem;   
+  height: 2.5rem;          
+  padding: 0.625rem 1rem;   
+  background-color: transparent;
+  border-color: #1E3A8A;
+  color: #1E3A8A;
+  font-size: 0.875rem;    
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: 0.015em;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+  border: 1px solid #1E3A8A;
 }

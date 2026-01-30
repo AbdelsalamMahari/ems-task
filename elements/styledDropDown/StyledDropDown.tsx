@@ -12,6 +12,7 @@ const StyledDropDown = ({ label, placeholder, options, value, onChange, name }:S
         value={value}
         onChange={onChange}
         name={name}
+        required
       >
         {placeholder && (
           <option value="" disabled hidden>

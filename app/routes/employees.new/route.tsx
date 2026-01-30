@@ -29,10 +29,9 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function NewEmployeePage() {
   return (
-    <div style={{padding: '3rem'}}>
-      <div style={{display:'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+    <div className="parent-cont">
+      <div className="nav-head">
       <HeaderNavigator title={'Create New Employee'} />
-      <LinkNavigator icon={<FiClock fontSize={'1.25rem'}/>} title={'Timesheets'} link={'/timesheets'}/>
       </div>
 
       <Form method="post">

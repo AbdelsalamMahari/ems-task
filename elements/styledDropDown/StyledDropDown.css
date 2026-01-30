@@ -28,7 +28,7 @@
 }
 
 .dropdown-select.has-value {
-  color: #101828;
+  color: #000;
 }
 
 .dropdown-select:focus {
@@ -36,6 +36,6 @@
 }
 
 .dropdown-select option {
-  color: #101828;
+  color: #000;
   background-color: #ffffff;
 }

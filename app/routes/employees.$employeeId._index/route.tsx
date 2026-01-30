@@ -1,7 +1,7 @@
 import EmployeeForm from "components/employeeForm/EmployeeForm"
 import Popup from "elements/popup/Popup"
 import { useState } from "react"
-import { Form, useLoaderData, useParams, type ActionFunction } from "react-router"
+import { Form, redirect, useLoaderData, useParams, type ActionFunction } from "react-router"
 import { getDB } from "~/db/getDB"
 import EmployeeInfo from "components/employeeInfo/EmployeeInfo"
 import HeaderNavigator from "elements/headerNavigator/HeaderNavigator"
@@ -39,7 +39,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     [full_name, email, phone_number, dob, job_title, department, salary, start_date, end_date, employeeId]
   );
 
-  return null;
+  return redirect('/employees');
 }
 
 export default function EmployeePage() {

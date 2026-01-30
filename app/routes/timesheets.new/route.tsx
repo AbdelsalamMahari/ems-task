@@ -1,4 +1,4 @@
-import { Form, redirect } from "react-router";
+import { Form, redirect, useLoaderData } from "react-router";
 import { getDB } from "~/db/getDB";
 
 export async function loader() {
@@ -9,6 +9,10 @@ export async function loader() {
 
 import type { ActionFunction } from "react-router";
 import TimesheetForm from "components/timesheetForm/TimesheetForm";
+import HeaderNavigator from "elements/headerNavigator/HeaderNavigator";
+import LinkNavigator from "elements/linkNavigator/LinkNavigator";
+import { FiClock, FiUser, FiUsers } from "react-icons/fi";
+import { useState } from "react";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -27,18 +31,22 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function NewTimesheetPage() {
+  const [selectedUserId, setSelectedUserId] = useState('')
 
   return (
-    <div>
-      <h1>Create New Timesheet</h1>
+    <div className="parent-cont">
+      <div className="nav-head">
+      <HeaderNavigator title={'Create New Timesheet'} />
+      <div className="nav-head-icons">
+        {selectedUserId && (
+        <LinkNavigator icon={<FiUser fontSize={'1.25rem'}/>} title={'Employee Page'} link={`/employees/${selectedUserId}`}/>
+        )}
+        <LinkNavigator icon={<FiUsers fontSize={'1.25rem'}/>} title={'Employees'} link={'/employees'}/>
+      </div>
+      </div>
       <Form method="post">
-        <TimesheetForm/>
+        <TimesheetForm setSelectedUserId={setSelectedUserId}/>
       </Form>
-      <hr />
-      <ul>
-        <li><a href="/timesheets">Timesheets</a></li>
-        <li><a href="/employees">Employees</a></li>
-      </ul>
     </div>
   );
 }

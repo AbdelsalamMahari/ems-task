@@ -1,8 +1,13 @@
 import TimesheetForm from "components/timesheetForm/TimesheetForm"
 import TimesheetInfo from "components/timesheetInfo/TimesheetInfo"
+import HeaderNavigator from "elements/headerNavigator/HeaderNavigator"
+import LinkNavigator from "elements/linkNavigator/LinkNavigator"
 import Popup from "elements/popup/Popup"
 import { useState } from "react"
-import { Form, useLoaderData, type ActionFunction } from "react-router"
+import { FaRegEdit } from "react-icons/fa"
+import { FiUsers } from "react-icons/fi"
+import { TbClockPlus } from "react-icons/tb"
+import { Form, redirect, useLoaderData, type ActionFunction } from "react-router"
 import { getDB } from "~/db/getDB"
 
 export async function loader({params}:any) {
@@ -21,14 +26,11 @@ export const action: ActionFunction = async ({ request, params }) => {
   const end_time = formData.get("end_time");
   const summary = formData.get("summary");
   const db = await getDB()
-  await db.run(
-    `UPDATE timesheets 
-     SET start_time = ?, end_time = ?, summary = ?
-     WHERE id = ?`,
+  await db.run( `UPDATE timesheets SET start_time = ?, end_time = ?, summary = ? WHERE id = ?`,
     [start_time, end_time, summary, timesheetId]
   );
 
-  return null;
+  return redirect('/timesheets');
 }
 
 export default function TimesheetPage() {
@@ -40,15 +42,19 @@ export default function TimesheetPage() {
   }
 
   return (
-    <div>
-      <div>
-        <TimesheetInfo data={timesheet} onUpdate={onUpdateClick}/>
+    <div className="parent-cont">
+            <div className="nav-head">
+        <HeaderNavigator title={timesheet.full_name} />
+        <div className="nav-head-icons">
+          <div style={{display: 'flex', gap: '0.5rem', alignItems: 'center', cursor: 'pointer'}} onClick={onUpdateClick}>
+            <>{<FaRegEdit />}</>
+            <h1 style={{fontSize: '1rem'}}>{'Edit TimeSheet'}</h1>
+            </div>
+          <LinkNavigator icon={<TbClockPlus fontSize={'1.25rem'}/>} title={'Add New Timesheet'} link={'/timesheet/new'}/>
+          <LinkNavigator icon={<FiUsers fontSize={'1.25rem'}/>} title={'Employees'} link={'/employees'}/>
+        </div>
       </div>
-      <ul>
-        <li><a href="/timesheets">Timesheets</a></li>
-        <li><a href="/timesheets/new">New Timesheet</a></li>
-        <li><a href="/employees/">Employees</a></li>
-      </ul>
+        <TimesheetInfo data={timesheet} onUpdate={onUpdateClick}/>
 
           {showUpdatePopup && (
         <Popup
