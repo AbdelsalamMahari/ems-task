@@ -21,8 +21,8 @@ const StyledDropDown = ({ label, placeholder, options, value, onChange, name }:S
         )}
 
         {options.map((option, index) => (
-          <option key={index} value={option.id}>
-            {option.full_name}
+          <option key={index} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>

@@ -4,13 +4,13 @@ import { FiClock, FiUsers } from "react-icons/fi"
 
 const cardsData = [
   {
-    icon: <FiUsers />,
+    icon: <FiUsers fontSize={'2rem'}/>,
     title: 'Employees',
     description: 'Manage employee, view details, and update employee information',
     link: '/employees'
   },
   {
-    icon: <FiClock />,
+    icon: <FiClock fontSize={'2rem'}/>,
     title: 'Timesheets',
     description: 'Track, create, and manage employee work hours',
     link: '/timesheets'

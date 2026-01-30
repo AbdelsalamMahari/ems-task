@@ -8,6 +8,11 @@ const TimesheetForm = ({data, setSelectedUserId}:any) => {
   const { employees } = useLoaderData(); // Used to create a select input
   const [employeeId, setEmployeeId] = useState("")
 
+  const transformedOptions = employees && employees.map((employee:any) => ({
+    label: employee.full_name,
+    value: employee.id
+  }))
+
   const handleOptionChange = (e:any) => {
     setEmployeeId(e.target.value)
     setSelectedUserId(e.target.value)
@@ -25,7 +30,7 @@ const TimesheetForm = ({data, setSelectedUserId}:any) => {
       {/* if !data so its update mode */}
       <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
       {!data && (
-          <StyledDropDown placeholder='Select Employee' label='Select Employee' name="employee_id" value={employeeId} onChange={handleOptionChange} options={employees}/>
+          <StyledDropDown placeholder='Select Employee' label='Select Employee' name="employee_id" value={employeeId} onChange={handleOptionChange} options={transformedOptions}/>
         )}
           <StyledInput label='Start Time' type="datetime-local" name="start_time" id="start_time" required value={timesheet.start_time} onChange={(e) => setTimeSheet({...timesheet, start_time: e.target.value})}/>
         

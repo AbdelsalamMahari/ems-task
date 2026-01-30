@@ -3,7 +3,8 @@ import NewEmployee from "components/employeeForm/EmployeeForm";
 import HeaderNavigator from "elements/headerNavigator/HeaderNavigator";
 import LinkNavigator from "elements/linkNavigator/LinkNavigator";
 import { FiClock } from "react-icons/fi";
-import { Form, redirect, type ActionFunction } from "react-router";
+import { Form, redirect, useActionData, type ActionFunction } from "react-router";
+import { getAge } from "utils/GetAge";
 import { getDB } from "~/db/getDB";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -18,6 +19,14 @@ export const action: ActionFunction = async ({ request }) => {
   const start_date = formData.get("start_date");
   const end_date = formData.get("end_date");
 
+  if(!full_name || !email || !phone_number || !start_date) {
+    return {message: 'Please fill out all required fields.'}
+  }
+
+  if(getAge(dob) < 18) {
+    return {message: 'Employee must be at least 18 years old.'}
+  }
+
   const db = await getDB();
   await db.run(
     'INSERT INTO employees (full_name, email, phone_number, dob, job_title, department, salary, start_date, end_date) VALUES (?,?,?,?,?,?,?,?,?)',
@@ -28,6 +37,7 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function NewEmployeePage() {
+  const msg = useActionData();
   return (
     <div className="parent-cont">
       <div className="nav-head">
@@ -35,7 +45,7 @@ export default function NewEmployeePage() {
       </div>
 
       <Form method="post">
-        <EmployeeForm/>
+        <EmployeeForm msg={msg}/>
       </Form>
     </div>
   );

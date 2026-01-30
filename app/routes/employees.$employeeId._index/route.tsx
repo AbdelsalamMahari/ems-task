@@ -1,7 +1,7 @@
 import EmployeeForm from "components/employeeForm/EmployeeForm"
 import Popup from "elements/popup/Popup"
 import { useState } from "react"
-import { Form, redirect, useLoaderData, useParams, type ActionFunction } from "react-router"
+import { Form, redirect, useActionData, useLoaderData, useParams, type ActionFunction } from "react-router"
 import { getDB } from "~/db/getDB"
 import EmployeeInfo from "components/employeeInfo/EmployeeInfo"
 import HeaderNavigator from "elements/headerNavigator/HeaderNavigator"
@@ -9,6 +9,7 @@ import LinkNavigator from "elements/linkNavigator/LinkNavigator"
 import { RiUserAddLine } from "react-icons/ri"
 import { FiClock } from "react-icons/fi"
 import { FaRegEdit } from "react-icons/fa"
+import { getAge } from "utils/GetAge"
 
 export async function loader({params}:any) {
   const { employeeId } = params
@@ -31,6 +32,15 @@ export const action: ActionFunction = async ({ request, params }) => {
   const salary = formData.get("salary");
   const start_date = formData.get("start_date");
   const end_date = formData.get("end_date");
+
+    if(!full_name || !email || !phone_number || !start_date) {
+      return {message: 'Please fill out all required fields.'}
+    }
+  
+    if(getAge(dob) < 18) {
+      return {message: 'Employee must be at least 18 years old.'}
+    }
+
   const db = await getDB()
   await db.run(
     `UPDATE employees 
@@ -44,7 +54,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function EmployeePage() {
   const { employee } = useLoaderData()
-  console.log("employee data", employee)
+  const msg = useActionData();
   const [showUpdatePopup, setShowUpdatePopup] = useState<boolean>(false)
 
   const onUpdateClick = () => {
@@ -71,7 +81,7 @@ export default function EmployeePage() {
         <Popup
         content={
           <Form method="post">
-            <EmployeeForm data={employee}/>
+            <EmployeeForm data={employee} msg={msg}/>
           </Form>
       }
         onClose={() => setShowUpdatePopup(false)}

@@ -7,5 +7,6 @@ export interface StyledInputProps {
   type?: React.HTMLInputTypeAttribute;
   name: string;
   id: string;
-  required?: boolean
+  required?: boolean;
+  msg?: any
 }

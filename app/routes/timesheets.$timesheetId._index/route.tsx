@@ -50,7 +50,6 @@ export default function TimesheetPage() {
             <>{<FaRegEdit />}</>
             <h1 style={{fontSize: '1rem'}}>{'Edit TimeSheet'}</h1>
             </div>
-          <LinkNavigator icon={<TbClockPlus fontSize={'1.25rem'}/>} title={'Add New Timesheet'} link={'/timesheet/new'}/>
           <LinkNavigator icon={<FiUsers fontSize={'1.25rem'}/>} title={'Employees'} link={'/employees'}/>
         </div>
       </div>
